@@ -12,25 +12,25 @@ services:
       - app-network
 
   service1:
-    build: ./service_1
+    build: ./service_1   # Fix: correct folder name (not service1)
     expose:
-      - "8081"
+      - "8001"
     networks:
       - app-network
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8081"]
+      test: ["CMD", "curl", "-f", "http://localhost:8001/ping"]   # /ping endpoint for health check
       interval: 30s
       timeout: 10s
       retries: 5
 
   service2:
-    build: ./service_2
+    build: ./service_2   # Fix: correct folder name (not service2)
     expose:
-      - "8082"
+      - "8002"
     networks:
       - app-network
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8082"]
+      test: ["CMD", "curl", "-f", "http://localhost:8002/ping"]   # /ping endpoint for health check
       interval: 30s
       timeout: 10s
       retries: 5
@@ -38,3 +38,4 @@ services:
 networks:
   app-network:
     driver: bridge
+
